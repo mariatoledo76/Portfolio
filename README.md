@@ -28,9 +28,15 @@
 
 
 ## Projects
+### Dynamic Email Generator - Python
+
+May 2025
+Associated with Hult International Business School
+
+   
 ### A Data-Driven SEO Strategy
 
-Feb 2025 - Feb 2025Feb 2025 - Feb 2025
+Feb 2025 - Feb 2025
 Associated with Hult International Business School
 Our team conducted a comprehensive SEO audit to identify gaps and opportunities in their website’s performance. We focused on:
  - Technical SEO: Fixing site speed issues, optimizing indexing, and ensuring mobile-friendliness.
@@ -45,7 +51,7 @@ Our team conducted a comprehensive SEO audit to identify gaps and opportunities 
 
 ### Hult Prize
 
-Nov 2024 - Feb 2025Nov 2024 - Feb 2025
+Nov 2024 - Feb 2025
 Associated with Hult International Business School
 
 - Empowering Change with the Hult Prize!

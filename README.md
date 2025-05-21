@@ -1,10 +1,9 @@
  ![profile](/assets/360_F_278687684_vXZpgT77CwU14zTwtrJh4dNUpt00K9a6.jpg)
 
 # Maria Camila Toledo
-
 ## Marketing Analyst
 
-### Technical Skills: Python, SPSS, Tableau, PowerBI.
+
 
 ## Education
 - Master of Science - MS | Marketing and Analytics - Hult International Business School (_Aug 2025)								       		
@@ -61,8 +60,11 @@ Associated with Hult International Business School
   sustainable business. Being part of this competition has not only challenged us to think outside the box but has also strengthened our teamwork, leadership, and entrepreneurial
   skills. Stay tuned for updates as we continue this journey toward transforming challenges into opportunities for a better world!
   -Teamwork, Startup Marketing.
-
+  
+ 
  ## Certifications
+ <img src="/assets/Linkedin.jpg" alt="Profile photo" width="290" align="right">  
+
 ### Intermediate Python
 
 DataCamp

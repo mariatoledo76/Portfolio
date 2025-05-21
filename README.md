@@ -4,7 +4,7 @@
 
 ## Marketing Analyst
 
-### Technical Skills: Python, SPSS, Tableau, PowerBI, MATLAB
+### Technical Skills: Python, SPSS, Tableau, PowerBI.
 
 ## Education
 - Master of Science - MS | Marketing and Analytics - Hult International Business School (_Aug 2025)								       		

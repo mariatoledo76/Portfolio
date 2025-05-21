@@ -29,9 +29,11 @@
 
 ## Projects
 ### Dynamic Email Generator - Python
+[Publication](file:///Users/camilatoledo/Desktop/Hult/Intro%20to%20Python/Assignments/Dynamic%20Email%20Generator%20Individual%20finalfinal.html)
 
 May 2025
 Associated with Hult International Business School
+![Dynamic Email](/Dynamic Email Generator Individual.ipynb)
 
    
 ### A Data-Driven SEO Strategy

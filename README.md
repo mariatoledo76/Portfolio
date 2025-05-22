@@ -28,8 +28,13 @@
 
 
 ## Projects
-### Dynamic Email Generator - Python
+### Bike Rentals Analysis - Python
 
+May 2025 
+Associated with Hult International Business School: 
+[Correlations Final - Jupyter Notebook](/files/Correlations%20Final.ipynb)
+
+### Dynamic Email Generator - Python
 May 2025 
 Associated with Hult International Business School: 
 [Correlations Final - Jupyter Notebook](/files/Correlations%20Final.ipynb)

@@ -3,7 +3,7 @@
 ## Marketing Analyst
 
 ## Education
-- Master of Science - MS | Marketing and Analytics - Hult International Business School (_Aug 2025)								       		
+- Master of Science - MS | Marketing and Analytics - Hult International Business School (_Aug 2025_)								       		
 - Professional in International Business	| Pontificia Universidad Javeriana Cali (_Jan 2021_)	 			        		
 
 ## Work Experience
@@ -71,7 +71,8 @@ Associated with Hult International Business School
   
  
  ## Certifications
- <img src="/assets/Linkedin.jpg" alt="Profile photo" width="290" align="right">  
+
+ <img src="/assets/Linkedin.jpg" alt="Profile photo" width="290" align="right">
 
 ### Intermediate Python
 

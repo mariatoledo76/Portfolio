@@ -2,8 +2,6 @@
 
 ## Marketing Analyst
 
-
-
 ## Education
 - Master of Science - MS | Marketing and Analytics - Hult International Business School (_Aug 2025)								       		
 - Professional in International Business	| Pontificia Universidad Javeriana Cali (_Jan 2021_)	 			        		

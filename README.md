@@ -37,7 +37,7 @@ Associated with Hult International Business School:
 ### Dynamic Email Generator - Python
 May 2025 
 Associated with Hult International Business School: 
-[Correlations Final - Jupyter Notebook](/files/Correlations%20Final.ipynb)
+[Dynamic Email - Jupyter Notebook](/files/Dynamic%20Email%20Generator%20Individual.ipynb)
    
 ### A Data-Driven SEO Strategy
 

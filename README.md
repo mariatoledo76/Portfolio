@@ -70,7 +70,7 @@ Associated with Hult International Business School
   -Teamwork, Startup Marketing.
   
  
- ## Certifications
+## Certifications
 
 <img src="./assets/Linkedin.jpg" alt="Profile photo" width="290" align="right">
 

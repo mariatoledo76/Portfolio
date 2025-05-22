@@ -1,6 +1,5 @@
  ![profile](/assets/360_F_278687684_vXZpgT77CwU14zTwtrJh4dNUpt00K9a6.jpg)
 
-# Maria Camila Toledo
 ## Marketing Analyst
 
 

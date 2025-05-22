@@ -72,7 +72,10 @@ Associated with Hult International Business School
  
  ## Certifications
 
- <img src="/assets/Linkedin.jpg" alt="Profile photo" width="290" align="right">
+<img src="./assets/Linkedin.jpg" alt="Profile photo" width="290" align="right">
+
+
+
 
 ### Intermediate Python
 

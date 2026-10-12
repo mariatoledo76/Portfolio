@@ -256,6 +256,16 @@ html{ -webkit-text-size-adjust:100%;text-size-adjust:100% }
 }
 @media(max-width:700px) and (max-height:650px){#matcha .matcha-facts p{font-size:12px}#matcha .matcha-facts li{padding:5px 0}#matcha .receipt-brand,#matcha .receipt-footer>p:last-child{display:none}#matcha .receipt-heading h2{font-size:24px}}
 
+
+.backstage-guide{position:absolute;inset:0;z-index:25;pointer-events:none;overflow:visible}.guide-star{position:absolute;width:54px;height:54px;margin:-27px;filter:drop-shadow(0 0 3px #fff) drop-shadow(0 0 10px #fff2b0) drop-shadow(0 0 24px #ffd45b);transition:left 1.1s cubic-bezier(.4,0,.2,1),top 1.1s cubic-bezier(.4,0,.2,1);color:#fff3bb}.guide-star svg{width:100%;height:100%;animation:guideShimmer 2.5s ease-in-out infinite}.guide-speck{position:absolute;width:5px;height:5px;border-radius:50%;background:#fff6ce;box-shadow:0 0 5px #fff,0 0 12px #ffd367;animation:guideDust .85s ease-out forwards}.guide-caption{position:absolute;transform:translate(-50%,26px);white-space:nowrap;background:#372521d9;border:1px solid #f7d89e70;color:#fff1d1;border-radius:20px;padding:6px 12px;font:500 12px/1.3 Arial,sans-serif;transition:left 1.1s,top 1.1s}.mobile-room-nav button.guide-next{box-shadow:0 0 0 2px #ffe1a4,0 0 16px #ffd68b80}
+@keyframes guideShimmer{0%,100%{transform:scale(.94);opacity:.95}50%{transform:scale(1.12);opacity:1}}@keyframes guideDust{to{opacity:0;transform:translateY(9px) scale(.2)}}
+@media(prefers-reduced-motion:reduce){.guide-star,.guide-caption{transition:none}.guide-star svg{animation:none}.guide-speck{display:none}}
+.stage-lock-marker{position:absolute;left:66%;top:36%;z-index:26;pointer-events:none;display:flex;align-items:center;gap:6px;padding:6px 9px;border-radius:14px;background:#302022d9;color:#ffe4d5;border:1px solid #e4bab750;font:500 11px/1.2 Arial,sans-serif;transform:translateX(-50%)}.stage-lock-marker svg{width:15px;height:17px}.stage-lock-marker[hidden]{display:none}
+.room .doorhot.stage-locked,.room .doorhot.stage-locked:hover,.room .doorhot.stage-locked:focus-visible{cursor:default;background:transparent;border-color:transparent;box-shadow:none;outline:none;filter:none;transform:none}
+.room .doorhot.stage-locked .backstage-hover-object,.room .doorhot.stage-locked:hover .backstage-hover-object,.room .doorhot.stage-locked:focus-visible .backstage-hover-object{animation:none;filter:none;transform:none}
+.room .doorhot.stage-locked .label{display:none}
+.mobile-room-nav button.stage-locked{display:none}
+
 </style><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&amp;family=Poppins:wght@400;500;600;700;800&amp;display=swap">
 </head><body>
 <!-- Opening review: existing first build; original backstage and modal handlers preserved. -->
@@ -556,6 +566,40 @@ html{ -webkit-text-size-adjust:100%;text-size-adjust:100% }
  const stage=document.querySelector('.stage-finale-canvas'),heading=document.createElement('h1');heading.className='mobile-stage-heading';heading.textContent='Thanks for touring my brain.';stage.append(heading);
  [['.stage-linkedin','LinkedIn'],['.stage-email','Email'],['.stage-resume','Download résumé'],['.stage-backstage','Back backstage']].forEach(([selector,label])=>stage.querySelector(selector).textContent=label);
 })();
+
+
+(() => {
+ const room=document.getElementById('backstage'),canvas=room.querySelector('.backstage-canvas');
+ const steps=[{id:'mirror',target:'.mirrorhot',x:40,y:14,label:'Start here'}, {id:'dresser',target:'.boots',x:85,y:13,label:'Next: my career'}, {id:'passport',target:'.passport',x:12.5,y:51,label:'Next: my journey'}];
+ const guide=document.createElement('div');guide.className='backstage-guide';guide.setAttribute('aria-hidden','true');
+ const star=document.createElement('span');star.className='guide-star';star.innerHTML='<svg viewBox="0 0 48 48" fill="currentColor"><path d="M24 2C26 18 30 22 46 24C30 26 26 30 24 46C22 30 18 26 2 24C18 22 22 18 24 2Z"/><circle cx="24" cy="24" r="4" fill="#fffbed"/></svg>';
+ const caption=document.createElement('span');caption.className='guide-caption';guide.append(star,caption);canvas.append(guide);
+ const reduced=matchMedia('(prefers-reduced-motion:reduce)');const seen=new Set();let active=0,animation=0;
+ function point(step){return {x:canvas.clientWidth*step.x/100,y:canvas.clientHeight*step.y/100}}
+ function move(previous,next){cancelAnimationFrame(animation);if(reduced.matches)return;const from=point(previous),to=point(next),start=performance.now();function trail(now){const t=Math.min(1,(now-start)/1100),ease=t*t*(3-2*t),dust=document.createElement('i');dust.className='guide-speck';dust.style.left=(from.x+(to.x-from.x)*ease+(Math.random()-.5)*15)+'px';dust.style.top=(from.y+(to.y-from.y)*ease+(Math.random()-.5)*15)+'px';guide.append(dust);dust.addEventListener('animationend',()=>dust.remove(),{once:true});if(t<1)animation=requestAnimationFrame(trail)}animation=requestAnimationFrame(trail)}
+ function update(){const previous=steps[active];active=steps.findIndex(s=>!seen.has(s.id));const next=steps[active];guide.hidden=!next||[...document.querySelectorAll('.modal.open')].length>0;room.querySelectorAll('.mobile-room-nav button').forEach(b=>b.classList.remove('guide-next'));if(!next)return;[star,caption].forEach(el=>{el.style.left=next.x+'%';el.style.top=next.y+'%'});caption.textContent=next.label;const target=room.querySelector(next.target);const nav=[...room.querySelectorAll('.mobile-room-nav button')].find(b=>b.textContent===({mirror:'Mirror',dresser:'Closet',passport:'Passport'}[next.id]));if(nav)nav.classList.add('guide-next');if(previous&&previous!==next&&!guide.hidden)move(previous,next)}
+ const modals=[...document.querySelectorAll('.modal')],states=new Map(modals.map(m=>[m,m.classList.contains('open')]));const observer=new MutationObserver(()=>{modals.forEach(m=>{const open=m.classList.contains('open'),was=states.get(m);if(was&&!open&&steps.some(s=>s.id===m.id))seen.add(m.id);states.set(m,open)});update()});modals.forEach(m=>observer.observe(m,{attributes:true,attributeFilter:['class']}));update();
+})();
+
+
+(() => {
+ const room=document.getElementById('backstage'),door=room.querySelector('.doorhot');
+ const required=[...new Set([...room.querySelectorAll('[data-open]')].map(x=>x.getAttribute('data-open')))];
+ const lock=document.createElement('span');lock.className='stage-lock-marker';lock.innerHTML='<svg viewBox="0 0 24 26" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="4" y="11" width="16" height="13" rx="3"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg><span>Locked</span>';room.querySelector('.backstage-canvas').append(lock);
+ const visited=new Set(),stage=document.getElementById('finale');
+ const mobile=[...room.querySelectorAll('.mobile-room-nav button')].find(x=>x.textContent==='Stage');
+ const originalTab=door.getAttribute('tabindex'),originalHref=door.getAttribute('href');let unlocked=false;
+ function sync(){
+  required.forEach(id=>{if(document.getElementById(id)?.classList.contains('open'))visited.add(id)});
+  unlocked=required.every(id=>visited.has(id));lock.hidden=unlocked;
+  door.classList.toggle('stage-locked',!unlocked);door.setAttribute('aria-disabled',String(!unlocked));
+  if(unlocked){originalTab===null?door.removeAttribute('tabindex'):door.setAttribute('tabindex',originalTab);if(originalHref)door.setAttribute('href',originalHref)}else{door.setAttribute('tabindex','-1');door.removeAttribute('href');stage.classList.remove('open')}
+  if(mobile){mobile.classList.toggle('stage-locked',!unlocked);mobile.disabled=!unlocked}
+ }
+ door.addEventListener('click',event=>{if(!unlocked){event.preventDefault();event.stopImmediatePropagation()}},true);
+ const observer=new MutationObserver(sync);required.forEach(id=>observer.observe(document.getElementById(id),{attributes:true,attributeFilter:['class']}));sync();
+})();
+
 
 document.querySelectorAll('[data-open]').forEach(b=>b.onclick=()=>document.getElementById(b.dataset.open).classList.add('open'));document.querySelectorAll('.close').forEach(b=>b.onclick=()=>b.closest('.modal').classList.remove('open'));document.querySelectorAll('.modal').forEach(m=>m.onclick=e=>{if(e.target===m)m.classList.remove('open')});
 function persona(h,p){document.getElementById('persona').innerHTML=`<h3>${h}</h3><p>${p}</p>`}function proj(x){document.querySelectorAll('.project').forEach(p=>p.classList.remove('active'));document.getElementById('p-'+x).classList.add('active')}const fortunes=['Your next good idea needs a messy first draft.','Send the email.','The plot twist is probably worth it.','You are allowed to change the plan.','Book the trip. Figure out the rest later.'];function sip(){document.getElementById('fortune').innerHTML='FORTUNE MATCHA ✦<br>'+fortunes[Math.floor(Math.random()*fortunes.length)]+'<br><button onclick="sip()">TAKE ANOTHER SIP 🍵</button>'}function soundcheck(){alert('🎤 soundcheck: lights up, mic on, five seconds of main-character energy.')}function tick(){const d=new Date();document.getElementById('time').textContent=d.toLocaleTimeString([], {hour:'2-digit',minute:'2-digit'});document.getElementById('date').textContent=d.toLocaleDateString([], {weekday:'long',month:'long',day:'numeric'})}tick();setInterval(tick,1000);

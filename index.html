@@ -266,6 +266,9 @@ html{ -webkit-text-size-adjust:100%;text-size-adjust:100% }
 .room .doorhot.stage-locked .label{display:none}
 .mobile-room-nav button.stage-locked{display:none}
 
+
+.backstage-explore-prompt{position:absolute;left:50%;top:78%;transform:translateX(-50%);z-index:28;width:max-content;max-width:min(520px,85vw);box-sizing:border-box;padding:16px 46px 16px 22px;border:1px solid #f4cebb80;border-radius:18px;background:#352325ed;color:#fff4e9;box-shadow:0 8px 30px #24131955;font:400 15px/1.5 Arial,sans-serif;text-align:center}.backstage-explore-prompt strong{display:block;font:500 23px/1.2 'Playfair Display',Georgia,serif;color:#f5bdd0;margin-bottom:6px}.backstage-explore-prompt button{position:absolute;right:6px;top:5px;width:36px;height:36px;background:none;border:0;color:#fff4e9;font:24px Arial,sans-serif;cursor:pointer}.backstage-explore-prompt[hidden]{display:none}@media(max-width:700px){.backstage-explore-prompt{position:fixed;left:50%;top:auto;bottom:90px;font-size:14px;max-width:90vw;width:350px;padding:14px 44px 14px 18px}.backstage-explore-prompt button{width:44px;height:44px}.backstage-explore-prompt strong{font-size:22px}}
+
 </style><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&amp;family=Poppins:wght@400;500;600;700;800&amp;display=swap">
 </head><body>
 <!-- Opening review: existing first build; original backstage and modal handlers preserved. -->
@@ -600,6 +603,14 @@ html{ -webkit-text-size-adjust:100%;text-size-adjust:100% }
  const observer=new MutationObserver(sync);required.forEach(id=>observer.observe(document.getElementById(id),{attributes:true,attributeFilter:['class']}));sync();
 })();
 
+
+
+(() => {
+ const passport=document.getElementById('passport'),room=document.getElementById('backstage');let wasOpen=passport.classList.contains('open'),shown=false;
+ const prompt=document.createElement('div');prompt.className='backstage-explore-prompt';prompt.hidden=true;prompt.setAttribute('role','status');prompt.innerHTML='<strong>Make yourself at home.</strong>There’s more to discover. Look around and click the other objects.<button type="button" aria-label="Dismiss exploration message">×</button>';room.querySelector('.backstage-canvas').append(prompt);
+ prompt.querySelector('button').addEventListener('click',()=>prompt.hidden=true);
+ const modals=[...document.querySelectorAll('.modal')];const observer=new MutationObserver(()=>{const open=passport.classList.contains('open');if(wasOpen&&!open&&!shown){shown=true;prompt.hidden=false}wasOpen=open;if(modals.some(m=>m.classList.contains('open')))prompt.hidden=true});modals.forEach(m=>observer.observe(m,{attributes:true,attributeFilter:['class']}));
+})();
 
 document.querySelectorAll('[data-open]').forEach(b=>b.onclick=()=>document.getElementById(b.dataset.open).classList.add('open'));document.querySelectorAll('.close').forEach(b=>b.onclick=()=>b.closest('.modal').classList.remove('open'));document.querySelectorAll('.modal').forEach(m=>m.onclick=e=>{if(e.target===m)m.classList.remove('open')});
 function persona(h,p){document.getElementById('persona').innerHTML=`<h3>${h}</h3><p>${p}</p>`}function proj(x){document.querySelectorAll('.project').forEach(p=>p.classList.remove('active'));document.getElementById('p-'+x).classList.add('active')}const fortunes=['Your next good idea needs a messy first draft.','Send the email.','The plot twist is probably worth it.','You are allowed to change the plan.','Book the trip. Figure out the rest later.'];function sip(){document.getElementById('fortune').innerHTML='FORTUNE MATCHA ✦<br>'+fortunes[Math.floor(Math.random()*fortunes.length)]+'<br><button onclick="sip()">TAKE ANOTHER SIP 🍵</button>'}function soundcheck(){alert('🎤 soundcheck: lights up, mic on, five seconds of main-character energy.')}function tick(){const d=new Date();document.getElementById('time').textContent=d.toLocaleTimeString([], {hour:'2-digit',minute:'2-digit'});document.getElementById('date').textContent=d.toLocaleDateString([], {weekday:'long',month:'long',day:'numeric'})}tick();setInterval(tick,1000);
